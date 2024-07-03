@@ -8,12 +8,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-app.post("/toto", async function(req, res){
+app.post("/todo", async function(req, res){
     const createPayLoad = req.body;
     const parsedPayLoad = createTodo.safeParse(createPayLoad);
 
     if(!parsedPayLoad.success){
-      res.send(411).json(
+      res.status(411).json(
         {
           msg: "Wrong Inputs", 
         }
@@ -54,7 +54,7 @@ app.put("/completed", async function(req, res){
     const parsedUPayLoad = updateTodo.safeParse(updatePayLoad);
 
     if(!parsedUPayLoad.success){
-      res.send(411).json(
+      res.status(411).json(
         {
           msg: "Wrong inputs",
         }
