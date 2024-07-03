@@ -3,11 +3,13 @@
 const {createTodo, updateTodo} = require( "./types.js");
 const { todo } = require("./db.js")
 const express = require("express");
+const cors = require ('cors');
 const app = express();
 
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 app.post("/todo", async function(req, res){
     const createPayLoad = req.body;
@@ -56,7 +58,7 @@ app.get("/todos/:id", async (req, res) => {
   return res.json(todosId);
 });
 
-app.put("/completed", async function(req, res){
+app.put("/todo/:id", async function(req, res){
     const updatePayLoad = req.body;
     const parsedUPayLoad = updateTodo.safeParse(updatePayLoad);
 
@@ -68,14 +70,21 @@ app.put("/completed", async function(req, res){
       )
     }
 
-    await todo.update({
-      _id: req.body.id
-    },{
-      completed: true
-    })
-    res.json({
-      msg: "Marked as completed"
-    })
+    try {
+      const updatedTodo = await todo.updateOne(
+        { _id: req.params.id },
+        { completed: req.body.completed }
+      );
+  
+      if (updatedTodo.nModified === 0) {
+        return res.status(404).json({ msg: "Todo not found or already updated" });
+      }
+  
+      res.json({ msg: "Marked as completed" });
+    } catch (error) {
+      console.error("Error updating todo:", error);
+      res.status(500).json({ msg: "Internal server error" });
+    }
 })
 
 app.listen(3000);

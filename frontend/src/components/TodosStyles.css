@@ -1,0 +1,57 @@
+/* TodoStyles.css */
+.todo-list {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.todo-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-item h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.todo-item h2 {
+  margin: 5px 0;
+  font-size: 18px;
+  color: #666;
+}
+
+.todo-item button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-item button:hover {
+  background-color: #0056b3;
+}
+
+.todo-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.todo-item.completed {
+  background-color: #c5f1cf; /* Green background for completed todos */
+  text-decoration: line-through; /* Optional: strike-through text for completed todos */
+}
+
+button {
+  margin-top: 10px;
+}
