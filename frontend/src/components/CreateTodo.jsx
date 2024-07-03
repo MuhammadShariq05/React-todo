@@ -1,7 +1,8 @@
+import './TodoStyles.css';
 export function CreateTodo(){
   return (
     <>
-      <div>
+      <div className="todo-container">
         <input type="text" placeholder="title" /><br />
         <input type="text" placeholder="description"/><br />
 
