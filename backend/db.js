@@ -6,12 +6,16 @@ const mongoose = require("mongoose")
 //   description: string,
 //   completed: boolean
 // }
-// mongodb://localhost:27017/todos
-mongoose.connect("mongodb://localhost:27017/todos")
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/todos")
+  .then(()=> console.log("MongoDb connected"))
+  .catch((err) => {console.log("MongoDb Error")}) 
+
 const todoSchema = mongoose.Schema({
-    title: string,
-    description: string,
-    completed: boolean
+    title: String,
+    description: String,
+    completed: Boolean,
 })
 
 const todo = mongoose.model("todos", todoSchema);

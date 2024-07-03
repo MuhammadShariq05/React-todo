@@ -1,6 +1,7 @@
 // writing basic express boilerplate code,
 //with express.json() middleware
 const {createTodo, updateTodo} = require( "./types.js");
+const { todo } = require("./db.js")
 const express = require("express");
 const app = express();
 
@@ -21,7 +22,7 @@ app.post("/todo", async function(req, res){
     }
 
     try {
-      const todo = await todo.create({
+      await todo.create({
           title: createPayLoad.title,
           description: createPayLoad.description,
           completed: false
@@ -32,22 +33,28 @@ app.post("/todo", async function(req, res){
           message: "Todo created successfully", 
           todo: todo 
       });
-  } catch (error) {
+    } 
+    catch (error) {
       // If there's an error during todo creation, return a 500 response with the error details
       res.status(500).json({ 
           message: "An error occurred while creating the todo", 
           error: error.message 
       });
-  }
+    }
 })
 
 app.get("/todos", async function(req, res){
-    const todos = await todos.find({});
-    res.json({
-      todos
-    })
-
+    const todos = await todo.find({});
+    return res.json(todos);
 })
+
+// dynamic route ~ GET /api/users/:id
+app.get("/todos/:id", async (req, res) => {
+  // get id //now we have to find id in the json file.
+  const todosId = await todo.findById(req.params.id);
+  if (!todosId) return res.status(404).json({ msg: "Not found" });
+  return res.json(todosId);
+});
 
 app.put("/completed", async function(req, res){
     const updatePayLoad = req.body;
