@@ -1,0 +1,4 @@
+First thing to do for a project is to build its backend
+
+// initialize a node project// put a package.json
+// not sharing node_modules
