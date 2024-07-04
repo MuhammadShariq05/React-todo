@@ -76,7 +76,7 @@ app.put("/todo/:id", async function(req, res){
         { completed: req.body.completed }
       );
   
-      if (updatedTodo.nModified === 0) {
+      if (updatedTodo.Modified === 0) {
         return res.status(404).json({ msg: "Todo not found or already updated" });
       }
   
@@ -87,4 +87,6 @@ app.put("/todo/:id", async function(req, res){
     }
 })
 
-app.listen(3000);
+app.listen(3000, ()=>{
+  console.log("Listening on port 3000");
+});
