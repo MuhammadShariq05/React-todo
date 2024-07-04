@@ -9,6 +9,7 @@ import {Todos} from './components/Todos'
 export function TodoApp() {
   const [todos, setTodos] = useState([]);
 
+  
   // Fetch initial todos (if any) from the server
   useEffect(() => {
     fetch("http://localhost:3000/todos")
@@ -25,12 +26,17 @@ export function TodoApp() {
         "Content-type": "application/json"
       }
     })
-    .then(response => response.json())
-    .then(newTodo => {
-      setTodos(prevTodos => [...prevTodos, newTodo]);
-      alert("Todo Added");
-    })
+
     .catch(error => console.error('Error adding todo:', error));
+ 
+  };
+
+  const fetchTodos = () => {
+    fetch("http://localhost:3000/todos")
+      .then(response => response.json())
+      .then(data => setTodos(data))
+      .catch(error => console.error('Error fetching todos:', error));
+      console.log(fetchTodos);
   };
 
   const toggleComplete = (id, completed) => {
@@ -55,7 +61,7 @@ export function TodoApp() {
   return (
     <div className="app-container">
       <CreateTodo addTodo={addTodo} />
-      <Todos todos={todos} toggleComplete={toggleComplete}/>
+      <Todos todos={todos} toggleComplete={toggleComplete} fetchTodos={fetchTodos}/>
     </div>
   );
 }

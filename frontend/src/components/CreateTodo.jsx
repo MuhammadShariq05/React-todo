@@ -10,12 +10,10 @@ export function CreateTodo({ addTodo }){
     <>
       <div className="todo-container">
         <input type="text" placeholder="title" onChange={function(e){
-          const value = e.target.value;
           setTitle(e.target.value)
         }}></input><br />
         <input type="text" placeholder="description" onChange={function(e){
-          const value = e.target.description;
-          setDescription(e.target.description)
+          setDescription(e.target.value)
         }}></input><br />
         <button onClick={() => {
           addTodo(title, description);
