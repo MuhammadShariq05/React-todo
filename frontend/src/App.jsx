@@ -26,15 +26,23 @@ export function TodoApp() {
         "Content-type": "application/json"
       }
     })
-
     .catch(error => console.error('Error adding todo:', error));
+
+    sleep(3000).then(() => { fetchTodos(); });
  
   };
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   const fetchTodos = () => {
     fetch("http://localhost:3000/todos")
       .then(response => response.json())
-      .then(data => setTodos(data))
+      .then(data => {
+        console.log(data);
+        setTodos(data);
+      })
       .catch(error => console.error('Error fetching todos:', error));
       console.log(fetchTodos);
   };

@@ -11,7 +11,7 @@
 import React from 'react';
 import './TodosStyles.css'
 
-export function Todos({ todos }) {
+export function Todos({ todos, toggleComplete }) {
   return (
     <>
       <div className="todo-list">
